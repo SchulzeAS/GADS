@@ -913,7 +913,7 @@ ArtPoint(u)
   time <- time +1; d[u] <- time
   LOW[u] <- d[u]
   for each v in Adj[u]
-    do if (color[v] = WHITE)        (u,v) Baumkante
+    do if (color[v] = WHITE)        //(u,v) Baumkante
         pred[v] <- u
         ArtPoint(v)
         LOW[u] <- min(LOW[u],LOW[v])
@@ -922,8 +922,73 @@ ArtPoint(u)
         else if(LOW[v]≥ d[u])
           then gib u als A.P. aus
         else if(v!= pred[u])
-          LOW[u] <- min(Low[u],d[v])    (u,b) Rückwärtskante, oder Halbkante zu einer solchen.
+          LOW[u] <- min(Low[u],d[v])    //(u,b) Rückwärtskante, oder Halbkante zu einer solchen.
 ```
 
 <u>Lemma:</u>  
  Die Artikulationspunkte eines zusammenhängenden Graphen können in Zeit O(V+E) bestimmt werden.
+
+Der Algorithmus kann so abgewandelt werden, dass Brücken entdeckt werden.
+
+BCC Partition der Kantenmenge
+Def. Relation ~ auf der Kantenmenge E
+
+$e_1 \thicksim e_2$ g.d.w. $e_1 = e_2$ oder es gibt einen einfachen Kreis C, der beide Kanten $e_1$ und $e_2$ enthält.
+
+(einfacher Kreis: kein Knoten ist zweimal auf dem Pfad enthalten.)  
+
+~ ist eine Äquivalenzrelation, BCC sind die Äquivalenzklassen von ~.  
+Graph G = (V,E)  
+E = {$e_1,e_2\dots,e_m$}    
+Teilgraph von G gegeben durch Kantenvektor $\{0,1\}^m$.  
+
+$$b_i = \begin{cases}1  \qquad    e_i \text{ gehört zum Teilgraphen}\\
+0 \qquad    e_i \text{ gehört nicht dazu}
+
+\end{cases}$$
+
+Ein Teilgraph heißt Zyklus, wenn jeder Knoten im Teilgraphen geraden Grad hat.
+
+
+```
+O-----O
+|     |
+|     |
+O-----O---O
+      |   |
+      |   |
+      O---O
+```
+Beispiel für einen Zyklus.
+
+Die Menge aller Zyklen bilden einen $\mathbb{Z_2}$-Vektorraum.  
+
+$C_1,\dots,C_k$ Zyklen
+
+$\sum^n_{i=1} C_i$
+
+Komponentenweise Addition:   
+Kante gehört zu $C_1 + ... + C_k$, falls e in ungeradzahlig vielen der Zyklen $C_1,..C_k$ vorkommt.
+
+Sei G zusammenhängend und T ein aufspannender Baum von G.
+Zu jeder Kante in G-T gibt es einen zugehörigen sogenannten <u> Fundamentalzyklus</u> bzgl. T
+bestehend aus der Kante e = {u,v}  und dem eindeutigen Pfad zwischen (u,v) in T. Für $e \in E$ sei $C_e$ ihr Fundamentalzyklus.  
+
+T muss kein DFS-Baum sein.  
+
+<u>Lemma:</u>  
+Die Fundamentalzyklen bzgl. eines aufspannenden Baumes T bilden eine Basis des Zyklenraums.
+
+Erzeugendensystem:
+Sei C ein Zyklus.  
+seien $e_1..e_k$ die in C vorhandenen, verschiedenen Kanten aus G-T.Dann ist $C=C_{e_1}+C_{e_2}+...+C_{e_k}$<-- Zyklus $C_B$  
+$C+C_B$ ist Zyklus.  
+Behauptung $C + C_B = \emptyset$
+
+Jedes $e_i$ kommt genau einmal in C und $C_B$ vor, also nicht in $C+C_B$. Sonst kommen keine Kanten aus G-T vor.  
+Also kommen $C+C_B$ nur Kanten aus T vor. In T gibt es aber keine Zyklen außer dem trivialen, der leeren Menge.
+
+Lineare Unabhängigkeit:
+
+$\lambda_1C_{e_1} + \lambda_2C_{e_2} +...+ \lambda_lC_{e_l}$  
+$e_i$ können nicht durch andere Fundamentalzyklen eliminiert werden. => $\lambda_i = 0$
