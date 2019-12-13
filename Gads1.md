@@ -888,7 +888,42 @@ Für alle k ist $V_k$ eine SCC. Beweiß durch Induktion über k.
  #Vorlesung 10 - 13.Dezember 2019
  Wurzel ist Artikulationspunkt g.d.w. sie im DFS-Baum mehr als ein Kind hat.
 
- v ist Artikulationspunkt, g.d.w es ein Kind gibt, so dass aus dem UNterbaum des Kindes keine Rückwärtskanten zu einem echten Vorfahr von v führt.
+ v ist Artikulationspunkt, g.d.w es ein Kind gibt, so dass aus dem Unterbaum des Kindes keine Rückwärtskanten zu einem echten Vorfahr von v führt.
 
  Definiere für Knoten u:  
- $Low[u] = min(\{d[u]\} \cup \{d[w|(v',w) \in B \text{ v' ist echter Nachfolger von u}\})$
+ $Low[u] = min(\{d[u]\} \cup \{d[w|(v',w) \in B \text{ v' ist echter Nachfolger von u}\})$  
+
+ Wie kommen wir zu den Low-Werten?  
+
+ ```
+ Initialisierung:
+  Low[u] <- d[u]
+ Rückwärtskante(u,v)
+  Low[u] <- min(Low[u],d[v])
+ Baumkante(u,v')
+  Low[u] <- min(Low[u],Low[v'])
+  //nach Beendigung des Aufrufs DFS_VISIT(v')
+
+
+```
+
+```
+ArtPoint(u)
+  color[u] <- GRAY
+  time <- time +1; d[u] <- time
+  LOW[u] <- d[u]
+  for each v in Adj[u]
+    do if (color[v] = WHITE)        (u,v) Baumkante
+        pred[v] <- u
+        ArtPoint(v)
+        LOW[u] <- min(LOW[u],LOW[v])
+        if(pred[u] = NULL)
+          if v ist zweites Kind von u then gib u als A.P. aus
+        else if(LOW[v]≥ d[u])
+          then gib u als A.P. aus
+        else if(v!= pred[u])
+          LOW[u] <- min(Low[u],d[v])    (u,b) Rückwärtskante, oder Halbkante zu einer solchen.
+```
+
+<u>Lemma:</u>  
+ Die Artikulationspunkte eines zusammenhängenden Graphen können in Zeit O(V+E) bestimmt werden.
