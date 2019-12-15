@@ -32,8 +32,13 @@ Ich schlage den Eulertour Algorithmus aus der Vorlesung vor, mit der Abwandlung,
 Geben Sie einen effizienten EREW-PRAM-Algorithmus an, der für jeden Knoten v eines geordneten binären Wurzelbaumes die Anzahl der Elemente im Unterbaum mit Wurzel v bestimmt.  
 
 ###7. Aufgabe:
-Beweisen oder widerlegen Sie: Falls es in einem gerichteten Graphen G eine Kante (u,v) gibt, so ist bei
+Beweisen oder widerlegen Sie:  
+ Falls es in einem gerichteten Graphen G eine Kante (u,v) gibt, so ist bei
 jeder Tiefensuche auf G die discovery time d[v] von v kleiner als die finishing time f [u] von u.  
+
+####Antwort:  
+Angenomen die Kante (v,u) existiert nicht, so ist diese Aussage korrekt, da $v \in Adj(u)$ und alle Knoten aus Adj(u) vor entdeckt werden müssen, bevor f[u] gesetzt wird.
+
 ###8. Aufgabe:
 Erklären Sie, ob bzw. wie es sein kann, dass in einem gerichteten Graphen G bei einer Tiefensuche ein DFS-Baum entsteht, der nur aus einem Knoten u besteht, obwohl u sowohl eingehende als auch ausgehende Kanten besitzt.
 
