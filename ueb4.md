@@ -1,4 +1,4 @@
-## Übung 4
+ ## Übung 4
 ### 1. Aufgabe:
 Erklären Sie, warum eine Aussage der Art  
 $$\text{Die Laufzeit von Algorithmus A ist mindestens } O(n^2)$$
