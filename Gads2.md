@@ -80,4 +80,29 @@ $e_1$ ~ $e_2$ g.d.w es gibt einfachen Kreis $C_s$, der $e_1$ und $e_2$ enthält
   Tarjan & Vishkin betrachten weitere Relationen auf Kanten.  
   $R^{(i)}$  
   {v,w} $R^{(i)}$ zu {w,p(w)}  
-  falls $\{v,w\} \in G-T$ und v<w
+  falls $\{v,w\} \in G-T$ und v<w  
+
+  $R^{(ii)}$:  
+   $\{v,p(v)\} R^{(ii)} \{w,p(w)\}$  
+  falls $\{v,w\} \in G-T$  
+  und weder w Vorgänger von   
+  v in T noch v Vorgänger von w  
+  ($p(v) = p(w)$ möglich)  
+
+  $R^{(iii)}$:  
+  {u,v} $R^{(iii)}$ {v,w}
+  falls v = p(w), u=p(v) und es gibt eine Kante in G-T, die einen Nachfolger von w mit einem Knoten verbindet, der kein Nachfolger von v ist.
+
+$(R^{(i)}\cup R^{(ii)} \cup R^{(iii)})^{* } => R'$
+
+Kantengraphen:  
+G' = (E,R')
+G'' = (E,$R^{(ii)} \cup R^{(iii)}$)  
+Ausdünnen vermeidet quadritsch große Kantenmenge in Kantengraphen.
+$|R^{(ii)}\cup R^{(iii)}| = O(E)$  
+
+Äquivalenzklassen von ~ bzw. (R')*  
+= Zusammenhangskomponenten von (E,(R')* )
+z.z Zusammenhangskomponenten von (E,$R^{(i)}\cup R^{(ii)}\cup R^{(iii)}$)
+
+#PRÜFUNG: 
