@@ -13,7 +13,7 @@ Zeigen Sie, dass
 $$\sum^{n-1}_{k=\lfloor{n\over 2}\rfloor} k \leq {3 \over 8}n^2 + {1\over 2}n$$
 
 ### 3. Aufgabe:
-Gegeben seien paarweise verschiedene Zahlen $x_1,...,x_n$ und zugehörige Gewichte w1,...,wn, so dass $\sum w_i = 1$. Der gewichtete Median ist das Element $x_k$, für das gilt:  
+Gegeben seien paarweise verschiedene Zahlen $x_1,...,x_n$ und zugehörige Gewichte $w_1,...,w_n$, so dass $\sum w_i = 1$. Der gewichtete Median ist das Element $x_k$, für das gilt:  
 $$ \sum_{x_i < x_k} w_i \leq {1 \over 2}\quad \text{ und }\quad \sum_{x_i > x_k} w_i \leq {1 \over 2}  $$
 
 (a) Zeigen Sie, wie man den gewichteten Median mit Hilfe eines Sortieralgorithmus in Zeit O(nlogn) bestimmen kann.  
