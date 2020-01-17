@@ -98,11 +98,50 @@ $(R^{(i)}\cup R^{(ii)} \cup R^{(iii)})^{* } => R'$
 Kantengraphen:  
 G' = (E,R')
 G'' = (E,$R^{(ii)} \cup R^{(iii)}$)  
-Ausdünnen vermeidet quadritsch große Kantenmenge in Kantengraphen.
+Ausdünnen vermeidet quadratisch große Kantenmenge in Kantengraphen.
 $|R^{(ii)}\cup R^{(iii)}| = O(E)$  
 
 Äquivalenzklassen von ~ bzw. (R')*  
 = Zusammenhangskomponenten von (E,(R')* )
 z.z Zusammenhangskomponenten von (E,$R^{(i)}\cup R^{(ii)}\cup R^{(iii)}$)
 
-#PRÜFUNG: 
+#Vorlesung 11 17.1.20
+Prüfungsgedöns:  
+G29-218  
+18-19.2  
+24.3      
+##------
+aufspannender Baum T,  
+Fundamentalzyklen bzgl. T -> R'    
+
+Sequentieller Algorithmus  
+
+Schritt 1:   
+- Bestimme aufspannenden Baum T für G = (V,E) mit Explorationsalgorithmus mit linearer Laufzeit O(V+E)
+- Nummeriere Knoten in preorder nach Bestimmung eines Wurzelknotens. Identifiziere Knoten mit preorder-Nummer.  
+- Bestimme für jeden Knoten die Anzahl der Knoten im Unterbaum v -> nd(v) //nd = number of descendants
+
+/////  
+$nd(v_0) = \sum_{i=1}^k nd(v_i) + 1$
+Aufsummieren der nd-Werte im unterbaum von v0  
+/////
+
+Schritt 2:
+- Berechne für jeden Knoten v den kleinsten (bzgl. PREORDER) Knoten, der von v oder einem Baumnachfolger von v aus durch eine Kante in G-T erreichbar ist, oder Baumnachfolger von v ist.  
+Nenne Knoten low(v).  
+analog high(v).  
+$low(v)= min(\{w|\{v,w\}\in G-T\} \cup \{v\} \cup \{low(u) | p(u) = v\})$
+$high(v)= max(\{w|\{v,w\}\in G-T\} \cup \{v\} \cup \{high(u) | p(u) = v\})$  
+
+Schritt 3:
+- Konstruiere Graphen G''=(T,$R^{(ii)} \cup R^{(iii)}$)  
+Für alle Kanten {w,v} $\in$ G-T mit v + nd(v) ≤ w füge Kante {{p(v),v},{p(w),w}} zu G'' hinzu.  
+Für alle Kanten {v,w} aus T mit p(w)= v und v ≠1(V ≠ Wurzel) füge Kante {{v,p(v)},{v,w}} zu G'' hinzu, falls low(w)<v oder high(w) ≥ v + nd(v)
+
+Schritt 4:  
+- Bestimme die Zusammenhangskomponenten von G''  
+Schritt 5:  
+Erweitere CC im Kanten in G-T:
+{v,w} $\in$ G-T wird CC von {p(w),w} zugeordnet, falls v<w.
+
+insg.: O(V+E)
