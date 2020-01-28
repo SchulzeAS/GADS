@@ -145,3 +145,60 @@ Erweitere CC im Kanten in G-T:
 {v,w} $\in$ G-T wird CC von {p(w),w} zugeordnet, falls v<w.
 
 insg.: O(V+E)
+##Vorlesung vor der Vorletzen:
+Krankheitsbedingt ferngeblieben um Tee zu trinken und im Bett zu liegen.  
+
+##Vorletze Vorlesung
+BCC parallel  
+Schritt 2:  
+
+    locallow(j) =
+    min({j} u {k| (j,k) in G-T})  
+mit Pointerjumping aus den Adjazenzlisten in Zeit O(log V) mit 2E Prozessoren  
+#globallow und globalhigh nachlesen.  
+Schritt 3:  
+Bestimme $G'' = (E,R^{(i)} \cup R^{(iii)})$  
+Für Alle Kanten in G-T in O(1) in G'' eintragen, falls Bedingungen erfüllt sind:  
+low(w) < v ODER high(w)>v+nd(v)-1  
+Test in O(1)  
+Anzahl Kanten in G'' ?  
+Beschränkt durch |G-T| + |T| = |E|
+
+Schritt 4: Bestimme CC(Connected Compontents) in G''  
+
+Ordne Kante in G-T der Zusammenhangskomponente der blauen Baumkante zu. Zeit O(1)  
+
+paralleler Algorithmus zur Berechnung der CC eines ungerichteten Graphen.  
+Ziel:
+Konstruiere "Sterne"   
+
+Verweise in einem Feld D gespeichert.  
+2 Zentrale Operationen:  
+_Hooking_  
+Shortcutting: Überspringen von Knoten in Graph: also u -> v -> w => u -> w und v chillt woanders rum, aber zeigt noch auf w.  
+
+Algorithmus ist Folge von Shortcutting und Hookingoperationen, in Stufen zusammengefasst.  
+
+Initial verweist jeder Knoten im Graphen auf sich selbst.
+
+Jede Stufe besteht aus 5 Schritten:
+
+Schritt 1: Short-Cutting.  
+Schritt 2: Hooking.  
+Wurzel oder Kind einer Wurzel:
+$D_s[i_1] = D_s-1[i_1]$  
+Bedingung:$D_s[i_2] < D_S[i_1]$  
+Einhängen nur bei Kleineren Knoten.  
+Schritt 3: Hooking stagnierender Wurzeln.  
+$(i_1,i_2)$  
+Q($D_s(i_1)$) < s  
+Wurzel in Schritt 2 nicht woanders eingehängt.  
+Schritt 4: Shortcutting.  
+Schritt 5: Test, ob sich in Stufe s was geändert hat mit Hilfe des Feldes Q.
+
+Lemma: Hooking in Schritt 2 erzeugt keine (neuen) Kreise.  
+Knotennummer-werden immer kleiner  
+Algorithmus ist CRCW-Algorithmus:
+CW: "Einer wird gewinnen, wer gewinnt spielt keine Rolle".
+
+Kanten, welche tatsächlich zum Hooking führen, werden als Baumkanten markiert.2
